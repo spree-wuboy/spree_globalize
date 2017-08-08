@@ -9,7 +9,7 @@ module SpreeGlobalize
 
   module VERSION
     MAJOR = 3
-    MINOR = 1
+    MINOR = 3
     TINY  = 0
     PRE   = "beta"
 
