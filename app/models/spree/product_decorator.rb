@@ -1,5 +1,9 @@
 module Spree
   Product.class_eval do
+    if SpreeGlobalize::Translations[:product].present?
+      translates *SpreeGlobalize::Translations[:product], :fallbacks_for_empty_translations => true
+      include SpreeGlobalize::Translatable
+    end
     translates :name, :description, :meta_title, :meta_description, :meta_keywords, :slug,
       fallbacks_for_empty_translations: true
 

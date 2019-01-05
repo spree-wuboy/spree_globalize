@@ -11,6 +11,21 @@ module SpreeGlobalize
       SpreeGlobalize::Config = SpreeGlobalize::Configuration.new
     end
 
+    initializer "spree_globalize.translations", before: :load_config_initializers do |app|
+      SpreeGlobalize::Translations = {
+          :option_type => [:name, :presentation],
+          :option_value => [:name, :presentation],
+          :product => [:name, :description, :meta_description, :meta_keywords, :slug],
+          :promotion => [:name, :description],
+          :product_property => [:value],
+          :property => [:name, :presentation],
+          :shipping_method => [:name],
+          :store => [:name, :meta_description, :meta_keywords, :seo_title],
+          :taxon => [:name, :description, :meta_title, :meta_description, :meta_keywords, :permalink],
+          :taxonomy => [:name]
+      }
+    end
+
     initializer "spree_globalize.permitted_attributes", before: :load_config_initializers do |app|
       taxon_attributes = { translations_attributes: [:id, :locale, :name, :description, :permalink, :meta_description, :meta_keywords, :meta_title] }
       Spree::PermittedAttributes.taxon_attributes << taxon_attributes

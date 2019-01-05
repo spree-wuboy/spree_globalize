@@ -1,7 +1,8 @@
 module Spree
   Store.class_eval do
-    translates :name, :meta_description, :meta_keywords, :seo_title,
-               fallbacks_for_empty_translations: true
-    include SpreeGlobalize::Translatable
+    if SpreeGlobalize::Translations[:store].present?
+      translates *SpreeGlobalize::Translations[:store], :fallbacks_for_empty_translations => true
+      include SpreeGlobalize::Translatable
+    end
   end
 end
